@@ -1,0 +1,41 @@
+.app {
+  width: 90%;
+  max-width: 1280px;
+  margin: 0px auto;
+  padding: 16px;
+}
+
+.toolbar {
+  margin-bottom: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 16px;
+  border-bottom: 1px #fff solid;
+  border: 1px solid #414141;
+  border-radius: 8px;
+}
+.addbutton {
+  text-decoration: none;
+  background: #fff;
+  height: 30px;
+  font-weight: 300;
+  font-size: 18px;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 0.4em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #414141;
+}
+
+.addbutton:hover {
+  transform: translate(-0.05em, -0.05em);
+}
+
+.addbutton:active {
+  transform: translate(0.05em, 0.05em);
+  /* box-shadow: 0.05em 0.05em #070707;
+  border: 2px solid rgb(0, 0, 0); */
+}

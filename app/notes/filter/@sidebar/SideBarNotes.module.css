@@ -1,0 +1,23 @@
+.menuList {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  /* background-color: #d3d3d3; */
+}
+
+.menuItem {
+  margin-bottom: 16px;
+}
+
+.menuLink {
+  color: #414141;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  display: block;
+}
+
+.menuLink.active,
+.menuLink:hover {
+  transform: translateX(2px);
+}
