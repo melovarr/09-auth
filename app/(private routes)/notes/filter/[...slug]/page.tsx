@@ -1,4 +1,4 @@
-import { fetchNotes } from '@/lib/api';
+import { fetchNotesServer } from '@/lib/api/serverApi';
 import NotesClient from './Notes.client';
 import { Tag } from '@/types/note';
 import { Metadata } from 'next';
@@ -51,7 +51,7 @@ const Notes = async ({ params }: NotesProps) => {
   const { slug } = await params;
   const tag =
     slug.length > 0 && slug[0] !== 'All' ? (slug[0] as Tag) : undefined;
-  const initialNotesData = await fetchNotes(tag ?? '', 1);
+    const initialNotesData = await fetchNotesServer('', 1, tag);
 
   return <NotesClient initialNotesData={initialNotesData} tag={tag} />;
 };

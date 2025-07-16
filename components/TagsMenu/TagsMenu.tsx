@@ -3,7 +3,20 @@
 import { useState } from 'react';
 import css from './TagsMenu.module.css';
 import Link from 'next/link';
-import { tags } from '../../constants/tags';
+
+export const tags: string[] = [
+  'All',
+  'Work',
+  'Personal',
+  'Meeting',
+  'Shopping',
+  'Ideas',
+  'Travel',
+  'Finance',
+  'Health',
+  'Important',
+  'Todo',
+];
 
 const TagsMenu = () => {
   const [isOpen, setIsOpen] = useState(false);

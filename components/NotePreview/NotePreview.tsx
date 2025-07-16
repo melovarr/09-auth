@@ -3,9 +3,9 @@
 import css from '../../app/notes/[id]/NoteDetails.module.css';
 import { useParams, useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
-import { fetchNoteById } from '@/lib/api';
+import { fetchNoteById } from '@/lib/api/clientApi';
 import Loader from '@/app/loading';
-import NoteError from '../../app/notes/[id]/error';
+import NoteError from '../../app/(private routes)/notes/[id]/error';
 
 const NotePreview = () => {
   const router = useRouter();
@@ -18,7 +18,7 @@ const NotePreview = () => {
     error,
   } = useQuery({
     queryKey: ['note', id],
-    queryFn: () => fetchNoteById(Number(id)),
+    queryFn: () => fetchNoteById(id as string),
     refetchOnMount: false,
   });
 

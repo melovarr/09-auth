@@ -1,4 +1,4 @@
-import { fetchNoteById } from '@/lib/api';
+import { fetchNoteById } from '@/lib/api/clientApi';
 import NoteDetailsClient from './NoteDetails.client';
 import {
   dehydrate,
@@ -17,7 +17,7 @@ export const generateMetadata = async ({
   params,
 }: Props): Promise<Metadata> => {
   const { id } = await params;
-  const { title, content } = await fetchNoteById(Number(id));
+  const { title, content } = await fetchNoteById(id as string);
   const snippet = content.length > 30 ? content.slice(0, 30) + '...' : content;
 
   return {
@@ -55,7 +55,7 @@ const NoteDetails = async ({ params }: Props) => {
 
   await queryClient.prefetchQuery({
     queryKey: ['note', id],
-    queryFn: () => fetchNoteById(Number(id)),
+    queryFn: () => fetchNoteById(id as string),
   });
 
   return (

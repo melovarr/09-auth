@@ -5,13 +5,10 @@ import css from './App.module.css';
 import SearchBox from '@/components/SearchBox/SearchBox';
 import NoteList from '@/components/NoteList/NoteList';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import { fetchNotes } from '@/lib/api';
+import { fetchNotes } from '@/lib/api/clientApi';
 import Pagination from '@/components/Pagination/Pagination';
-// import Modal from '@/components/Modal/Modal';
-// import NoteForm from '@/components/NoteForm/NoteForm';
 import { useDebounce } from 'use-debounce';
-// import Logo from "@/components/Logo/Logo";
-import type { FetchNotesResponse } from '@/lib/api';
+import type { FetchNotesResponse } from '@/lib/api/clientApi';
 import { Tag } from '@/types/note';
 import Link from 'next/link';
 
@@ -26,9 +23,7 @@ export default function NotesClient({
 }: NotesClientProps) {
   const [inputValue, setInputValue] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
-  // const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  //FETCHING & SEARCHING NOTES
   const [debouncedInputValue] = useDebounce(inputValue, 500);
 
   const notes = useQuery({
@@ -49,27 +44,15 @@ export default function NotesClient({
   return (
     <>
       <div className={css.app}>
-        {/* -------HEADER ELEMENTS--------- */}
-
         <div className={css.toolbar}>
           <div>
             <SearchBox value={inputValue} onSearch={handleSearchChange} />
           </div>
-          {/* <Logo /> */}
 
-          {/* <button
-            onClick={() => setIsModalOpen(true)}
-            className={css.addbutton}
-          >
-            Create note +
-          </button>
-        </div> */}
           <Link href={'/notes/action/create'} className={css.addbutton}>
             Create note +
           </Link>
         </div>
-
-        {/* -------NOTELIST--------- */}
 
         <NoteList notes={notes.data?.notes ?? []} />
         {totalPages > 0 && (
@@ -79,14 +62,6 @@ export default function NotesClient({
             onPageChange={setCurrentPage}
           />
         )}
-
-        {/* -------NOTE MODAL--------- */}
-        {/* 
-        {isModalOpen && (
-          <Modal onClose={() => setIsModalOpen(false)}>
-            <NoteForm onClose={() => setIsModalOpen(false)} />
-          </Modal>
-        )} */}
       </div>
     </>
   );

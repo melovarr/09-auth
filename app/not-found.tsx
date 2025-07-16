@@ -1,5 +1,3 @@
-// import Link from 'next/link';
-// import css from './page.module.css';
 import { Metadata } from 'next';
 import NotFoundClient from './NotFound.client';
 

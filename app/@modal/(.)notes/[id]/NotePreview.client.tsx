@@ -3,17 +3,15 @@
 import css from './NotePreview.module.css';
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
-import { fetchNoteById } from '@/lib/api';
+import { fetchNoteById } from '@/lib/api/clientApi';
 import Loader from '@/app/loading';
-import NoteError from '../../../notes/[id]/error';
+import NoteError from '../../../(private routes)/notes/[id]/error';
 import Modal from '@/components/Modal/Modal';
 
 type NotePreviewClientProps = { id: string | number };
 
 const NotePreviewClient = ({ id }: NotePreviewClientProps) => {
   const router = useRouter();
-  // Converting of ID to number, if nessesary
-  const numericId = typeof id === 'string' ? Number(id) : id;
 
   const {
     data: note,
@@ -21,8 +19,8 @@ const NotePreviewClient = ({ id }: NotePreviewClientProps) => {
     isLoading,
     error,
   } = useQuery({
-    queryKey: ['note', numericId],
-    queryFn: () => fetchNoteById(numericId),
+    queryKey: ['note', id],
+    queryFn: () => fetchNoteById(id as string),
     enabled: !!id,
     refetchOnMount: false,
   });

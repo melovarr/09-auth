@@ -3,8 +3,6 @@ import css from './CreateNote.module.css';
 import React from 'react';
 import { Metadata } from 'next';
 
-//Metadata----------------------------------------
-
 export const metadata: Metadata = {
   title: 'Create Note',
   description: 'Create a new note in NoteHub',
@@ -30,8 +28,6 @@ export const metadata: Metadata = {
     images: ['https://ac.goit.global/fullstack/react/notehub-og-meta.jpg'],
   },
 };
-
-//Component----------------------------------------
 
 const CreateNote = () => {
   return (

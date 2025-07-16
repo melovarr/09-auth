@@ -1,11 +1,22 @@
-export type Tag = 'Work' | 'Personal' | 'Meeting' | 'Shopping' | 'Todo';
+export type Tag =
+  | 'Work'
+  | 'Personal'
+  | 'Meeting'
+  | 'Shopping'
+  | 'Ideas'
+  | 'Travel'
+  | 'Finance'
+  | 'Health'
+  | 'Important'
+  | 'Todo';
 
 export interface Note {
-  id: number;
+  id: string;
   title: string;
   content: string;
   createdAt: string;
   updatedAt: string;
+  userId: string;
   tag: Tag;
 }
 

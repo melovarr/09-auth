@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import css from "./NoteDetails.module.css";
-import { useParams } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
-import { fetchNoteById } from "@/lib/api";
-import Loader from "@/app/loading";
-import NoteError from "./error";
+import css from './NoteDetails.module.css';
+import { useParams } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
+import { fetchNoteById } from '@/lib/api/clientApi';
+import Loader from '@/app/loading';
+import NoteError from './error';
 
 const NoteDetailsClient = () => {
   const { id } = useParams();
@@ -16,8 +16,9 @@ const NoteDetailsClient = () => {
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["note", id],
-    queryFn: () => fetchNoteById(Number(id)),
+    queryKey: ['note', id],
+    queryFn: () => fetchNoteById(id as string),
+    enabled: !!id,
     refetchOnMount: false,
   });
 
@@ -28,12 +29,12 @@ const NoteDetailsClient = () => {
   if (!note) return <p>Note not found</p>;
 
   const date = new Date(note.createdAt);
-  const formatetDate = date.toLocaleString("uk-UA", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
+  const formatetDate = date.toLocaleString('uk-UA', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
   });
 
   return (

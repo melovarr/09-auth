@@ -2,23 +2,12 @@
 
 import { useId, useState } from 'react';
 import css from './NoteForm.module.css';
-// import { Formik, Form, Field, type FormikHelpers, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import type { NewNoteData, Tag } from '../../types/note';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createNote } from '../../lib/api';
+import { createNote } from '../../lib/api/clientApi';
 import { useRouter } from 'next/navigation';
 import { useNoteDraftStore } from '@/lib/store/noteStore';
-
-// interface NoteFormProps {
-//   onClose: () => void;
-// }
-
-// const initialFormValues: NewNoteData = {
-//   title: '',
-//   content: '',
-//   tag: 'Todo',
-// };
 
 const NoteForm = () => {
   const fieldId = useId();
@@ -28,8 +17,6 @@ const NoteForm = () => {
   const [alert, setAlert] = useState<{ [key: string]: string }>({});
 
   const onClose = () => router.push('/notes/filter/All');
-
-  //HandleChange-------------------------------------------
 
   const handleChange = async (
     event: React.ChangeEvent<
@@ -50,8 +37,6 @@ const NoteForm = () => {
       .catch(err => setAlert(prev => ({ ...prev, [name]: err.message })));
   };
 
-  //ValidationSchema-------------------------------------------
-
   const validationSchema = Yup.object().shape({
     title: Yup.string()
       .required("Title can't be empty")
@@ -65,8 +50,6 @@ const NoteForm = () => {
       .required('Tag is required'),
   });
 
-  //Post notes func-------------------------------------------
-
   const { mutate } = useMutation({
     mutationFn: (values: NewNoteData) => createNote(values),
     onSuccess: () => {
@@ -75,8 +58,6 @@ const NoteForm = () => {
       queryClient.invalidateQueries({ queryKey: ['notes'] });
     },
   });
-
-  //HandleSubmit-------------------------------------------
 
   const handleSubmit = async (formData: FormData) => {
     const values: NewNoteData = {
@@ -88,8 +69,6 @@ const NoteForm = () => {
     mutate(values);
   };
 
-  //Button disabled logic-------------------------------------------
-
   const isFormValid =
     draft.title.trim().length >= 3 &&
     draft.title.trim().length <= 50 &&
@@ -97,8 +76,6 @@ const NoteForm = () => {
 
   return (
     <form action={handleSubmit} className={css.form}>
-      {/* -----Title input field----- */}
-
       <div className={css.formGroup}>
         <label className={css.formLabel} htmlFor={`${fieldId}-title`}>
           Title
@@ -113,8 +90,6 @@ const NoteForm = () => {
         />
         {alert.title && <div className={css.error}>{alert.title}</div>}
       </div>
-
-      {/* -----Content textarea field----- */}
 
       <div className={css.formGroup}>
         <label className={css.formLabel} htmlFor={`${fieldId}-content`}>
@@ -131,8 +106,6 @@ const NoteForm = () => {
         {alert.content && <div className={css.error}>{alert.content}</div>}
       </div>
 
-      {/* -----Select tag field----- */}
-
       <div className={css.formGroup}>
         <label className={css.formLabel} htmlFor={`${fieldId}-tag`}>
           Tag
@@ -144,15 +117,18 @@ const NoteForm = () => {
           onChange={handleChange}
           value={draft.tag}
         >
-          <option value="Todo">Todo</option>
           <option value="Work">Work</option>
           <option value="Personal">Personal</option>
           <option value="Meeting">Meeting</option>
           <option value="Shopping">Shopping</option>
+          <option value="Ideas">Ideas</option>
+          <option value="Travel">Travel</option>
+          <option value="Finance">Finance</option>
+          <option value="Health">Health</option>
+          <option value="Important">Important</option>
+          <option value="Todo">Todo</option>
         </select>
       </div>
-
-      {/* -----Action buttons----- */}
 
       <div>
         <button onClick={onClose} type="button" className={css.cancelButton}>
