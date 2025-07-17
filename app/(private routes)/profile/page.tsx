@@ -19,7 +19,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
       siteName: 'NoteHub',
       images: [
         {
-          url: avatar || '/default-avatar.jpg',
+          url: avatar || '/default-avatar.png',
           width: 1200,
           height: 630,
           alt: 'NoteHub App',
@@ -31,7 +31,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
       card: 'summary_large_image',
       title: username,
       description: `profile of ${username}`,
-      images: [avatar || '/default-avatar.jpg'],
+      images: [avatar || '/default-avatar.png'],
     },
   };
 };
@@ -52,7 +52,7 @@ const Profile = async () => {
         </div>
         <div className={css.avatarWrapper}>
           <Image
-            src={'/default-avatar.png'}
+            src={user.avatar || '/default-avatar.png'}
             alt="User Avatar"
             width={120}
             height={120}
@@ -61,7 +61,7 @@ const Profile = async () => {
         </div>
         <div className={css.profileInfo}>
           <p>Username: {user?.username || 'Guest'}</p>
-          <p>Email: {user?.email || 'your_email@example.com'}</p>
+          <p>Email: {user?.email || 'example@mail.com'}</p>
         </div>
       </div>
     </main>

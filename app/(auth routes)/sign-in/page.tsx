@@ -9,7 +9,7 @@ import { useAuthStore } from '@/lib/store/authStore';
 const SignInPage = () => {
   const router = useRouter();
   const [error, setError] = useState('');
-  const { setIsAuthenticated, setUser } = useAuthStore.getState();
+  const { setIsAuthenticated, setUser } = useAuthStore();
 
   const handleSubmit = async (formData: FormData) => {
     try {
