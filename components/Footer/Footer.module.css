@@ -7,6 +7,16 @@
   font-size: 14px;
   color: #555;
   border-top: 1px solid #ddd;
+  background-image:
+    linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0.3),
+      rgba(0, 0, 0, 0.3)
+    ),
+    url('/background.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
 }
 
 .wrap {
